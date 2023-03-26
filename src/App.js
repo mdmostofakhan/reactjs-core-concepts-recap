@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 function App() {
   return (
     <div className="App">
-      <LoadPost></LoadPost>
+       {/* <LoadPost></LoadPost> */}
+       <LoadTodos></LoadTodos>
       <District name='Mymonsing' special='Netrokuna'></District>
       <District name='Borishal' special='SodorGat'></District>
       <District name='Noakhali' special='bolg'></District>
@@ -14,37 +15,79 @@ function App() {
   );
 }
 
-//second functon componets-(1)-
-function LoadPost () {
- const [posts, setPosts] = useState([]);
- 
- useEffect( () =>{
-  fetch('https://jsonplaceholder.typicode.com/posts')
+
+function LoadTodos () {
+  const [todos, setTodos] = useState([1]);
+   
+  useEffect( ()=>{
+  fetch('https://jsonplaceholder.typicode.com/todos')
   .then(res => res.json())
-  .then(data => setPosts(data))
- }, [])
+  .then(data => setTodos(data))
+
+  },[])
 
  return(
-  <div>
-    <h1>Posts:{posts.length}</h1>
-    {
-      posts.map(post => <Post title={post.title} body={post.body}
-        userId={post.userId}
-        ></Post>)
-    }
-  </div>
- )
+     <div>
+        <h1>Name:{todos.length}</h1>
+       {
+        todos.map(todo => <Todos
+          names='Todos Man Bar'
+        title={todo.title}
+        userId={todo.userId}
+        ></Todos>)
+      }
+     
+    </div>
+   )
 }
-// third componets-(1)--
-function Post(props){
+
+function Todos(props) {
   return(
-    <div style={{backgroundColor: 'lightgray', padding: '15px', margin: '20px', border: '4px solid red', borderRadius: '20px'}}>
-      <h1>Title:{props.title}</h1>
-      <p>Body:{props.body}</p>
-      <p>UserId:{props.userId}</p>
+    <div className='todosContain'>
+      <h1>name:{props.names}</h1>
+      <h3>Title:{props.title}</h3>
+      <p>UsersId:{props.userId}</p>
+
     </div>
   )
 }
+
+
+
+
+
+
+//second functon componets-(1)-
+// function LoadPost () {
+//  const [posts, setPosts] = useState([]);
+ 
+//  useEffect( () =>{
+//   fetch('https://jsonplaceholder.typicode.com/posts')
+//   .then(res => res.json())
+//   .then(data => setPosts(data))
+//  }, [])
+
+//  return(
+//   <div>
+//     <h1>Posts:{posts.length}</h1>
+//     {
+//       posts.map(post => <Post title={post.title} body={post.body}
+//         userId={post.userId}
+//         ></Post>)
+//     }
+//   </div>
+//  )
+// }
+// third componets-(1)--
+// function Post(props){
+//   return(
+//     <div style={{backgroundColor: 'lightgray', padding: '15px', margin: '20px', border: '4px solid red', borderRadius: '20px'}}>
+//       <h1>Title:{props.title}</h1>
+//       <p>Body:{props.body}</p>
+//       <p>UserId:{props.userId}</p>
+//     </div>
+//   )
+// }
 
 // style direectiion---
 const districtStyle = {
